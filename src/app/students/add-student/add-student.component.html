@@ -1,0 +1,20 @@
+<h3>{{title}}</h3>
+<form [formGroup]="form" *ngIf="ready" (ngSubmit)="submit()" >
+  <mat-form-field appearance="outline">
+    <mat-label>Prénom</mat-label>
+    <input matInput formControlName="firstname" placeholder="Prénom">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Nom</mat-label>
+    <input matInput formControlName="lastname" placeholder="Nom">
+  </mat-form-field>
+  <mat-form-field *ngIf="classes$ | async; let classes;" appearance="fill">
+    <mat-label>Classe</mat-label>
+    <mat-select formControlName="classId">
+      <mat-option *ngFor="let c of classes" [value]="c.id">
+        {{c.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button [disabled]="!form.valid"  type="submit">Enregistrer</button>
+</form>

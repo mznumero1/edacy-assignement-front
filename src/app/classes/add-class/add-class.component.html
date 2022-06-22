@@ -1,0 +1,28 @@
+<h3>{{title}}</h3>
+<form [formGroup]="form" *ngIf="ready" (ngSubmit)="submit()" >
+  <mat-form-field appearance="outline">
+    <mat-label>Nom</mat-label>
+    <input matInput formControlName="name" placeholder="Nom">
+  </mat-form-field>
+  <button [disabled]="!form.valid"  type="submit">Enregistrer</button>
+</form>
+
+<div *ngIf="edit">
+  <h3>Liste des Etudiants de la classe</h3>
+  <table style="width: 80%;" #table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="firstname">
+      <th mat-header-cell *matHeaderCellDef> Prenom </th>
+      <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastname">
+      <th mat-header-cell *matHeaderCellDef> Nom </th>
+      <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
